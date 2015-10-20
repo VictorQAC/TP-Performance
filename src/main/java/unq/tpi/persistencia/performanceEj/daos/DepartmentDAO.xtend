@@ -8,7 +8,7 @@ class DepartmentDAO {
 
 	def getByName(String name) {
 		val session = SessionManager.getSession()
-		session.createQuery("from Department where name = :name")
+		session.createQuery("from Department as d join fetch d.employees where d.name = :name")
 				.setParameter("name", name).uniqueResult() as Department
 	}
 
